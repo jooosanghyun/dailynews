@@ -9,14 +9,14 @@
   * { box-sizing: border-box; }
   body { margin:0; font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif; color:#111827; background:#fff; }
   #topbar { position:sticky; top:0; z-index:100; display:flex; justify-content:space-between; align-items:center;
-            background:#fff; border-bottom:1px solid #e5e7eb; padding:8px 16px; height:48px; }
+            background:#fff; border-bottom:1px solid #e5e7eb; padding:8px 16px; height:56px; }
   #brand { font-weight:800; font-size:13px; color:#1e3a8a; letter-spacing:0.3px; }
   #brand span { color:#60a5fa; }
-  #dateBtn { display:flex; align-items:center; gap:8px; border:1px solid #e5e7eb; background:#fff; border-radius:6px;
-             padding:6px 12px; font-size:13px; font-weight:700; color:#111827; cursor:pointer; font-family:inherit; }
-  #dateBtn:hover { background:#f9fafb; }
-  #dateBtn .chev { color:#6b7280; font-size:11px; }
-  #calPop { display:none; position:absolute; top:46px; right:12px; width:308px; background:#fff;
+  #dateBtn { display:flex; align-items:center; gap:10px; border:none; background:#1e3a8a; border-radius:8px;
+             padding:10px 18px; font-size:15px; font-weight:700; color:#fff; cursor:pointer; font-family:inherit; }
+  #dateBtn:hover { background:#1d4ed8; }
+  #dateBtn .chev { color:#bfdbfe; font-size:12px; }
+  #calPop { display:none; position:absolute; top:54px; right:12px; width:308px; background:#fff;
             border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 8px 24px rgba(17,24,39,0.12); padding:12px 14px; }
   #calPop.open { display:block; }
   #calHead { display:flex; justify-content:space-between; align-items:center; margin:2px 2px 8px 2px; }
@@ -33,7 +33,7 @@
   .day.has b { color:#1d4ed8; font-weight:700; cursor:pointer; }
   .day.has b:hover { background:#eff6ff; }
   .day.sel b { background:#1e3a8a; color:#fff; font-weight:700; cursor:pointer; }
-  #frame { width:100%; height:calc(100vh - 48px); border:none; display:block; }
+  #frame { width:100%; height:calc(100vh - 56px); border:none; display:block; }
 </style>
 </head>
 <body>
