@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<title>Daily News Monitoring - 2026-05-27</title>
+<style>
+  body {
+    font-family: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
+    color: #111827;
+    background: #fff;
+    margin: 24px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  /* 브랜드바 */
+  .brand-bar {
+    background: linear-gradient(90deg, #003a8c 0%, #1e6fd9 60%, #3da8ff 100%);
+    height: 26px;
+    margin: 0 0 14px 0;
+    position: relative;
+  }
+  .brand-bar .tag {
+    position: absolute;
+    right: 14px;
+    top: 5px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+  .brand-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .brand-line .logo {
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #1e3a8a;
+    font-size: 18px;
+    border-left: 4px solid #2563eb;
+    padding-left: 10px;
+  }
+  .brand-line .logo .mobility {
+    color: #60a5fa;
+    font-weight: 900;
+    margin-left: 6px;
+  }
+  /* 타이틀 */
+  .title-block {
+    text-align: center;
+    margin: 14px 0 4px 0;
+  }
+  .title-block .title {
+    font-weight: 800;
+    font-size: 20px;
+    color: #111827;
+  }
+  .title-block .subtitle {
+    font-size: 12.5px;
+    color: #4b5563;
+    margin-top: 4px;
+  }
+  .title-block .meta {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+  }
+  /* 오늘 주목 박스 */
+  .today-box {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    padding: 10px 14px;
+    margin: 18px 0 24px 0;
+    border-radius: 2px;
+  }
+  .today-box .label {
+    font-weight: 800;
+    color: #1e3a8a;
+    font-size: 13px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .today-box .row {
+    margin: 6px 0;
+    color: #111827;
+    font-size: 12.8px;
+    line-height: 1.55;
+  }
+  .today-box .row .num {
+    display: inline-block;
+    width: 18px;
+    color: #2563eb;
+    font-weight: 800;
+  }
+  .today-box .row strong { color: #1e3a8a; }
+  .today-box .row em { font-style: normal; background: #fef3c7; padding: 0 3px; }
+  /* 섹션 헤더 */
+  .section-header {
+    border-left: 4px solid #2563eb;
+    padding: 4px 10px;
+    margin: 14px 0 8px 0;
+    color: #1e3a8a;
+    font-weight: 800;
+    font-size: 14px;
+    background: #f9fafb;
+  }
+  /* 표 */
+  table.news {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 12.5px;
+    border: 1px solid #e5e7eb;
+  }
+  table.news th, table.news td {
+    border-bottom: 1px solid #f1f5f9;
+    padding: 7px 8px;
+    vertical-align: middle;
+  }
+  table.news thead th {
+    background: #f9fafb;
+    text-align: center;
+    font-weight: 700;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  table.news tbody tr:hover { background: #fafbfc; }
+  table.news td.center { text-align: center; color: #4b5563; }
+  table.news td.title-cell a {
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  table.news td.title-cell a:hover {
+    color: #1e3a8a;
+    text-decoration: underline;
+  }
+  table.news td.title-cell .summary {
+    color: #4b5563;
+    font-size: 11.5px;
+    margin-top: 2px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .badge {
+    display: inline-block;
+    background: #e5e7eb;
+    color: #374151;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .badge.cvinfo {
+    background: #1e3a8a;
+    color: #fff;
+  }
+  .col-no    { width: 4%; text-align: center; }
+  .col-cat   { width: 9%; text-align: center; }
+  .col-title { width: 58%; }
+  .col-media { width: 13%; text-align: center; }
+  .col-date  { width: 9%; text-align: center; }
+  .tier0 { background: #fef3c7; }
+  .safety { background: #dbeafe; }
+  /* 푸터 */
+  .footer-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 10px 14px;
+    margin: 18px 0;
+    border-radius: 2px;
+    font-size: 11.5px;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+  .footer-box .label {
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .review-note {
+    background: #eff6ff;
+    border-left: 3px solid #60a5fa;
+    padding: 8px 12px;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: #1e3a8a;
+  }
+  .legend {
+    font-size: 11px;
+    color: #6b7280;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+  .legend .swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-right: 4px;
+    border: 1px solid #e5e7eb;
+  }
+</style>
+</head>
+<body>
+
+<!-- 브랜드바 -->
+<div class="brand-bar">
+  <span class="tag">DAILY NEWS MONITORING</span>
+</div>
+
+<div class="brand-line">
+  <div class="logo">TATA DAEWOO<span class="mobility">MOBILITY</span></div>
+</div>
+
+<!-- 타이틀 -->
+<div class="title-block">
+  <div class="title">타타대우모빌리티 데일리 뉴스 클리핑</div>
+  <div class="subtitle">2026년 5월 27일 (수) · 발행 08:00 KST</div>
+  <div class="meta">수집 범위: 2026-05-26 12:00 ~ 2026-05-27 09:30 (KST) · 룰북 v1.4 적용 · 채택 14건 (Top 3 / 국내 8 / 해외 3 / cvinfo 0)</div>
+</div>
+
+<!-- 오늘 주목할만한 내용 -->
+<div class="today-box">
+  <div class="label">오늘 주목할만한 내용</div>
+  <div class="row">
+    <span class="num">1.</span>
+    <strong>한경 "전기 화물차는 달리고 싶다"</strong> — 타타대우 중형 전기트럭이 보조금 전액 수령에도 디젤 대비 약 <em>1억원 비싼 가격</em>으로 시장 확대 정체. 상반기 보조금 지출액 '0원' 적시 — 자사 친환경 라인업 정책·가격 핵심 이슈.
+  </div>
+  <div class="row">
+    <span class="num">2.</span>
+    <strong>한경매거진 한-스웨덴 ESG — "디젤엔 보조금, 전기트럭엔 0원"</strong> — 볼보트럭코리아 이현철 상무가 ESG 컨퍼런스에서 직접 비판. <em>자사 친환경 라인업과 동일 정책 환경</em>이라 경쟁사 발언이지만 자사 메시지로도 활용 가능.
+  </div>
+  <div class="row">
+    <span class="num">3.</span>
+    <strong>오토타임즈 "현실성 없는 지원책…전기 화물차 보급 정책 흔들"</strong> — 중대형 화물차 연 10만km 주행 환경에 맞지 않는 정부 보조금 구조 비판. <em>상반기 보조금 집행액 0원</em> 데이터로 한경·한경매거진과 같은 정책 비판 라인 형성.
+  </div>
+</div>
+
+<!-- 금일 주요 기사 Top 3 -->
+<div class="section-header">금일 주요 기사 (Top 3)</div>
+<table class="news">
+  <thead>
+    <tr>
+      <th class="col-no">No.</th>
+      <th class="col-cat">카테고리</th>
+      <th class="col-title">제목 · 요약</th>
+      <th class="col-media">매체</th>
+      <th class="col-date">발행</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center">1</td>
+      <td class="center"><span class="badge">자사</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/015/0005291265?sid=101" target="_blank">전기 화물차는 달리고 싶다</a>
+        <div class="summary">기후부가 1.5~5t 중형 전기화물차에 4,000만원, 5t 초과 대형에 6,000만원 보조금 책정했으나 상반기 지출액 '0원'. 타타대우 중형 전기 트럭이 보조금 전액 수령에도 동급 디젤보다 1억원 비싸 시장 확대 정체. "차주에게 탄소 저감을 위해 큰 손실을 감수하라는 격" 시각 — 자사 친환경 라인업 가격·정책 핵심 이슈.</div>
+      </td>
+      <td class="center">한국경제</td>
+      <td class="center">05-26 15:55</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td class="center"><span class="badge">자사·정책</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/050/0000106600?sid=101" target="_blank">디젤엔 보조금, 전기트럭엔 0원… 정부 탄소중립 '보틀넥' [한-스웨덴 ESG]</a>
+        <div class="summary">스웨덴무역투자대표부 공동 주최 ESG 클럽 5월 모임에서 볼보트럭코리아 이현철 지속가능성 상무 발언. "디젤·수소 트럭에는 운행 보조금 있고, 전기 트럭은 0원". 경쟁사 발언이지만 자사 친환경 라인업과 동일 정책 환경 — 자사 메시지로도 활용 가능.</div>
+      </td>
+      <td class="center">한국경제매거진</td>
+      <td class="center">05-27 06:01</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td class="center"><span class="badge">자사·정책</span></td>
+      <td class="title-cell">
+        <a href="http://autotimes.co.kr/detail.php?number=687848&thread=27" target="_blank">현실성 없는 지원책…전기 화물차 보급 정책 흔들</a>
+        <div class="summary">중대형 화물차 연 평균 주행거리 10만km, 물류 부문 탄소 저감 위해 전동화 필요. 그러나 상반기 중대형 전기 화물차 보조금 집행액은 사실상 '0원' — 한경·한경매거진과 같은 정책 비판 라인. 자사 친환경 라인업 시장 환경 핵심.</div>
+      </td>
+      <td class="center">오토타임즈</td>
+      <td class="center">05-27 09:12</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 국내 뉴스 -->
+<div class="section-header">국내 뉴스 (8건)</div>
+<table class="news">
+  <thead>
+    <tr>
+      <th class="col-no">No.</th>
+      <th class="col-cat">카테고리</th>
+      <th class="col-title">제목 · 요약</th>
+      <th class="col-media">매체</th>
+      <th class="col-date">발행</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center">1</td>
+      <td class="center"><span class="badge">경쟁사</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/016/0002648201?sid=101" target="_blank">현대차 신형 마이티·파비스, 운전자들이 꼽은 변화는 '연비·편의성'[여車저車]</a>
+        <div class="summary">기존 오너 인터뷰 기반 더 뉴 2027 마이티·파비스 평가 — 디자인·실내 편의성·안전사양 개선에 호평, "연료 효율이 곧 수익"이라는 차주 시각. <strong>자사 중형 하이쎈 직접 경쟁군의 시장 평가</strong> 핵심.</div>
+      </td>
+      <td class="center">헤럴드경제</td>
+      <td class="center">05-26 14:01</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td class="center"><span class="badge">경쟁사</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/008/0005363005?sid=101" target="_blank">아이트럭-스카니아파이낸셜서비스, 상용차 금융·플랫폼 결합으로 시너지 극대화</a>
+        <div class="summary">중고 상용차 거래 플랫폼 '아이트럭'과 스카니아파이낸셜서비스 협력 — 플랫폼 역량 + 금융 노하우 결합으로 중고 상용차 시장 신뢰도 제고. <strong>경쟁사 금융·디지털 결합 모델</strong>, 자사 채널·금융 전략 점검 신호.</div>
+      </td>
+      <td class="center">머니투데이</td>
+      <td class="center">05-26 17:18</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td class="center"><span class="badge">기술동향</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/016/0002648466?sid=101" target="_blank">유로7 앞둔 대형트럭 엔진 경쟁…보그워너, 유럽 OEM에 핵심 부품 공급</a>
+        <div class="summary">보그워너가 유로7 대응 차세대 6기통 대형 디젤 엔진용 VTG 터보차저·EGR 쿨러 공동 개발 및 공급. 장거리 트럭 성능·연비 직결. <strong>유럽 OEM 엔진 경쟁 흐름</strong>으로 자사 HX12 수소엔진 및 디젤 라인업 전략 점검.</div>
+      </td>
+      <td class="center">헤럴드경제</td>
+      <td class="center">05-27 08:39</td>
+    </tr>
+    <tr>
+      <td class="center">4</td>
+      <td class="center"><span class="badge">경쟁사</span></td>
+      <td class="title-cell">
+        <a href="https://www.pinpointnews.co.kr/news/articleView.html?idxno=455336" target="_blank">현대차 노조, 순이익 30%·정년연장·고용보장 요구에 사측은 로봇 도입…노사 격돌</a>
+        <div class="summary">현대차 2026년 임단협 상견례 — 노조 월 14만9,600원 기본급 인상 + 지난해 순이익 30% 성과급 요구. 사측은 AI·휴머노이드 로봇 도입 강행. <strong>경쟁사 임단협 변수</strong>로 전주공장 가동 등 자사 환경 연동.</div>
+      </td>
+      <td class="center">핀포인트뉴스</td>
+      <td class="center">05-27 09:52</td>
+    </tr>
+    <tr>
+      <td class="center">5</td>
+      <td class="center"><span class="badge">거시</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/015/0005291447?sid=101" target="_blank">"한 시간짜리 대타 어떻게 구하나"…車업계 비상 걸린 까닭</a>
+        <div class="summary">생산라인 공정별 연결 구조에서 근로자 1명 결근만으로도 전체 생산 차질 발생, 특히 중소 부품사 비상. <strong>자사 군산공장·협력사 생산성</strong>과 직결되는 노동·인력 환경 시사.</div>
+      </td>
+      <td class="center">한국경제</td>
+      <td class="center">05-26 18:14</td>
+    </tr>
+    <tr>
+      <td class="center">6</td>
+      <td class="center"><span class="badge">정책</span></td>
+      <td class="title-cell">
+        <a href="https://www.gasnews.com/news/articleView.html?idxno=125287" target="_blank">경유만 유가연동보조금…LPG연료 형평성 지적</a>
+        <div class="summary">유가연동보조금 지급 기준 유가 1,700~1,961원 → 1,700~2,100원 상향. <strong>25톤 화물차 기준 월 최대 23만원 추가 지원</strong>. LPG 화물차는 제외돼 형평성 논란.</div>
+      </td>
+      <td class="center">가스신문</td>
+      <td class="center">05-26 13:00</td>
+    </tr>
+    <tr>
+      <td class="center">7</td>
+      <td class="center"><span class="badge">거시</span></td>
+      <td class="title-cell">
+        <a href="https://www.news2day.co.kr/article/20260526500106" target="_blank">유류세 인하 7월까지 연장…산업계 '고유가 장기화' 우려</a>
+        <div class="summary">유류세 인하 7월 말까지 연장. 경유는 화물·물류 비용과 직결돼 운송업계 부담 일부 완화. 다만 중동 지정학 리스크로 하반기 운임·물류비 변동성 확대.</div>
+      </td>
+      <td class="center">뉴스투데이</td>
+      <td class="center">05-27 06:32</td>
+    </tr>
+    <tr>
+      <td class="center">8</td>
+      <td class="center"><span class="badge">거시</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/008/0005362990?sid=101" target="_blank">호르무즈 봉쇄에 해운 운임 껑충…선사들 잇따라 할증료 인상</a>
+        <div class="summary">호르무즈 봉쇄·중동 리스크 장기화로 해상 운임·EFS 동시 상승. MSC 6월부터 아시아발 미국·캐나다행 화물 EFS 조정. <strong>자사 운송 고객 운영비 변동성 정점</strong>.</div>
+      </td>
+      <td class="center">머니투데이</td>
+      <td class="center">05-26 17:03</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 해외 뉴스 -->
+<div class="section-header">해외 뉴스 (3건)</div>
+<table class="news">
+  <thead>
+    <tr>
+      <th class="col-no">No.</th>
+      <th class="col-cat">카테고리</th>
+      <th class="col-title">제목 · 요약</th>
+      <th class="col-media">매체</th>
+      <th class="col-date">발행</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center">1</td>
+      <td class="center"><span class="badge">신기술</span></td>
+      <td class="title-cell">
+        <a href="https://www.theautochannel.com/news/2026/05/26/1672722-scania-pioneers-vehicle-to-grid-through-megawatt-charging-system-for.html" target="_blank">Scania pioneers vehicle-to-grid through Megawatt Charging System for heavy transport</a>
+        <div class="summary">스카니아가 대형 상용차용 V2G(Vehicle-to-Grid) 세계 최초 실증. MCS(메가와트 충전 시스템) 활용해 트럭이 전력망에 양방향 전력 공급(피크 쉐이빙·그리드 밸런싱·에너지 저장). 데포 충전 환경 우선 도입. 글로벌 신엔진·신기술(룰북 v1.4 메인 채택).</div>
+      </td>
+      <td class="center">Auto Channel</td>
+      <td class="center">05-26</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td class="center"><span class="badge">합작</span></td>
+      <td class="title-cell">
+        <a href="https://www.daimlertruck.com/en/newsroom/pressrelease/daimler-truck-and-volvo-group-sign-binding-agreement-for-joint-venture-to-develop-software-defined-vehicle-platform-52892408" target="_blank">Daimler Truck and Volvo Group sign binding agreement for joint venture to develop software-defined vehicle platform</a>
+        <div class="summary">다임러트럭·볼보그룹 50:50 합작법인 본계약 체결. 중대형 상용차용 SDV(소프트웨어 정의 차량) 플랫폼 공동 개발. 본사 스웨덴 예테보리. 글로벌 OEM 양사 결정적 합작(룰북 §해외 필터).</div>
+      </td>
+      <td class="center">Daimler Truck</td>
+      <td class="center">05-26</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td class="center"><span class="badge">합의금</span></td>
+      <td class="title-cell">
+        <a href="https://www.truckingdive.com/news/volvo-group-north-america-takes-nearly-197m-hit-in-carb-settlement/820847/" target="_blank">Volvo Group North America takes nearly $197M hit in CARB settlement</a>
+        <div class="summary">볼보그룹 북미법인이 캘리포니아 대기자원위원회(CARB)와 <strong>1억 9,650만 달러(약 2,700억 원)</strong> 합의금 합의. 2010~2016년 model year 1만 대+ 중대형 엔진의 보조 배출가스 제어장치(AECD) 미공개로 NOx 초과 배출 혐의. 민사 1,250만 + 대기오염기금 7,100만 + 캘리포니아 배출 저감 프로젝트 1억 800만 + CARB 비용 500만. 글로벌 OEM 결정적 합의금(룰북 §해외 필터 정확히 일치).</div>
+      </td>
+      <td class="center">Trucking Dive</td>
+      <td class="center">05-26</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 푸터 -->
+<div class="footer-box">
+  <span class="label">[전문지 참고] cvinfo (상용차매거진) — 수집 시점 신착 없음</span>
+  <ul style="margin:4px 0 4px 18px; padding:0;">
+    <li>cvinfo.com은 5/22 14:25 이후 신착 기사 없음(연휴 직후 휴간 추정). 발행 시점에 추가 게재 시 익일 보강.</li>
+    <li>참고 최근 미채택: <a href="https://www.cvinfo.com/news/articleView.html?idxno=31189" target="_blank">국회에서도 신랄히 질타한 "현대차·기아만을 위한 전기상용차 보조금 선정 기준"</a> (5/21, 정책 인기뉴스 1위)</li>
+  </ul>
+  <div class="review-note">
+    <strong>검수 권장 포인트.</strong>
+    ① 한경 "전기 화물차는 달리고 싶다" 본문에 자사 중형 전기트럭 가격(1.6~2억원) 명시 — 외부 노출 가격 정합성 점검 필요. ② cvinfo 5/22 이후 신착 공백은 명절·휴간 가능성으로, 오전 추가 모니터링 시 신착 발생 시 별도 보강. ③ <strong>참고(룰북 §1.1 범위 밖)</strong> — 산업통상자원부 「2026년 4월 자동차산업 동향」(5/20 발표, <a href="https://n.news.naver.com/mnews/article/003/0013956117?sid=101" target="_blank">뉴시스</a>)에 자사 4월 생산량 544대(-34.6%) 적시. 수집 window 밖이라 본문 채택은 보류했으나, 군산공장 가동률·재고·신차 전환 관점에서 사내 별도 모니터링 권장.
+  </div>
+</div>
+
+<div class="legend">
+  <span class="swatch" style="background:#fef3c7;"></span> Tier 0 (cvinfo, 상용차 전문지) &nbsp;|&nbsp;
+  <span class="swatch" style="background:#dbeafe;"></span> 산업·안전 이슈 &nbsp;|&nbsp;
+  선별 필터: ① 자사·경쟁사 직접 영향 · ② 화물운송·운임 거시 · ③ 정책·규제 · ④ 산업 안전·사고<br>
+  매체 우선순위: Tier 0 (cvinfo) → Tier 1 (종합·경제·통신사) → Tier 2 (선택적) · Rulebook v1.4
+</div>
+
+</body>
+</html>

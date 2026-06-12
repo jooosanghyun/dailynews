@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<title>Daily News Monitoring - 2026-05-28</title>
+<style>
+  body {
+    font-family: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
+    color: #111827;
+    background: #fff;
+    margin: 24px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  /* 브랜드바 */
+  .brand-bar {
+    background: linear-gradient(90deg, #003a8c 0%, #1e6fd9 60%, #3da8ff 100%);
+    height: 26px;
+    margin: 0 0 14px 0;
+    position: relative;
+  }
+  .brand-bar .tag {
+    position: absolute;
+    right: 14px;
+    top: 5px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+  .brand-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .brand-line .logo {
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #1e3a8a;
+    font-size: 18px;
+    border-left: 4px solid #2563eb;
+    padding-left: 10px;
+  }
+  .brand-line .logo .mobility {
+    color: #60a5fa;
+    font-weight: 900;
+    margin-left: 6px;
+  }
+  /* 타이틀 */
+  .title-block {
+    text-align: center;
+    margin: 14px 0 4px 0;
+  }
+  .title-block .title {
+    font-weight: 800;
+    font-size: 20px;
+    color: #111827;
+  }
+  .title-block .subtitle {
+    font-size: 12.5px;
+    color: #4b5563;
+    margin-top: 4px;
+  }
+  .title-block .meta {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+  }
+  /* 오늘 주목 박스 */
+  .today-box {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    padding: 10px 14px;
+    margin: 18px 0 24px 0;
+    border-radius: 2px;
+  }
+  .today-box .label {
+    font-weight: 800;
+    color: #1e3a8a;
+    font-size: 13px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .today-box .row {
+    margin: 6px 0;
+    color: #111827;
+    font-size: 12.8px;
+    line-height: 1.55;
+  }
+  .today-box .row .num {
+    display: inline-block;
+    width: 18px;
+    color: #2563eb;
+    font-weight: 800;
+  }
+  .today-box .row strong { color: #1e3a8a; }
+  .today-box .row em { font-style: normal; background: #fef3c7; padding: 0 3px; }
+  /* 섹션 헤더 */
+  .section-header {
+    border-left: 4px solid #2563eb;
+    padding: 4px 10px;
+    margin: 14px 0 8px 0;
+    color: #1e3a8a;
+    font-weight: 800;
+    font-size: 14px;
+    background: #f9fafb;
+  }
+  /* 표 */
+  table.news {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 12.5px;
+    border: 1px solid #e5e7eb;
+  }
+  table.news th, table.news td {
+    border-bottom: 1px solid #f1f5f9;
+    padding: 7px 8px;
+    vertical-align: middle;
+  }
+  table.news thead th {
+    background: #f9fafb;
+    text-align: center;
+    font-weight: 700;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  table.news tbody tr:hover { background: #fafbfc; }
+  table.news td.center { text-align: center; color: #4b5563; }
+  table.news td.title-cell a {
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  table.news td.title-cell a:hover {
+    color: #1e3a8a;
+    text-decoration: underline;
+  }
+  table.news td.title-cell .summary {
+    color: #4b5563;
+    font-size: 11.5px;
+    margin-top: 2px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .badge {
+    display: inline-block;
+    background: #e5e7eb;
+    color: #374151;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .badge.cvinfo {
+    background: #1e3a8a;
+    color: #fff;
+  }
+  .col-no    { width: 4%; text-align: center; }
+  .col-cat   { width: 9%; text-align: center; }
+  .col-title { width: 58%; }
+  .col-media { width: 13%; text-align: center; }
+  .col-date  { width: 9%; text-align: center; }
+  .tier0 { background: #fef3c7; }
+  .safety { background: #dbeafe; }
+  /* 푸터 */
+  .footer-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 10px 14px;
+    margin: 18px 0;
+    border-radius: 2px;
+    font-size: 11.5px;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+  .footer-box .label {
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .review-note {
+    background: #eff6ff;
+    border-left: 3px solid #60a5fa;
+    padding: 8px 12px;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: #1e3a8a;
+  }
+  .legend {
+    font-size: 11px;
+    color: #6b7280;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+  .legend .swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-right: 4px;
+    border: 1px solid #e5e7eb;
+  }
+</style>
+</head>
+<body>
+
+<!-- 브랜드바 -->
+<div class="brand-bar">
+  <span class="tag">DAILY NEWS MONITORING</span>
+</div>
+
+<div class="brand-line">
+  <div class="logo">TATA DAEWOO<span class="mobility">MOBILITY</span></div>
+</div>
+
+<!-- 타이틀 -->
+<div class="title-block">
+  <div class="title">타타대우모빌리티 데일리 뉴스 클리핑</div>
+  <div class="subtitle">2026년 5월 28일 (목) · 발행 08:00 KST</div>
+  <div class="meta">수집 범위: 2026-05-27 12:00 ~ 2026-05-28 07:30 (KST) · 룰북 v1.4 적용 · 채택 12건 (Top 3 / 국내 6 / 해외 3 / cvinfo 2)</div>
+</div>
+
+<!-- 오늘 주목할만한 내용 -->
+<div class="today-box">
+  <div class="label">오늘 주목할만한 내용</div>
+  <div class="row">
+    <span class="num">1.</span>
+    <strong>동아일보 "타타대우 '하이쎈', 중형트럭 빈틈 공략"</strong> — 고하중·고출력으로 재편된 중형트럭 시장의 <em>빈틈</em>을 자사 전략형 모델로 공략. 도심 물류·작업형 특장 시장 겨냥한 가격 경쟁력 메시지 — 자사 신차 시장 포지셔닝 1면 노출.
+  </div>
+  <div class="row">
+    <span class="num">2.</span>
+    <strong>아이뉴스24 "노란봉투법 두 달, 현대차그룹 원·하청 교섭 갈등 본격화"</strong> — 현대글로비스 광주·<em>전주</em>·울산 3개 지회 1,292명 등 현대차 사내하청·물류 자회사 동시 교섭 요구. 전주공장 가동 환경에 직접 영향 — 자사 환경에도 후행 압력.
+  </div>
+  <div class="row">
+    <span class="num">3.</span>
+    <strong>메트로서울 "수소산업 무게추 이동…생산·저장 인프라 구축 본격화"</strong> — 현대차그룹이 새만금에 태양광 + <em>200MW 수전해</em> 플랜트 구축해 그린수소 생산, 전주공장 수소버스·트럭 연료로 활용. 자사 수소상용차 라인업·HX12 엔진 정책 환경 핵심.
+  </div>
+</div>
+
+<!-- 금일 주요 기사 Top 3 -->
+<div class="section-header">금일 주요 기사 (Top 3)</div>
+<table class="news">
+  <thead>
+    <tr>
+      <th class="col-no">No.</th>
+      <th class="col-cat">카테고리</th>
+      <th class="col-title">제목 · 요약</th>
+      <th class="col-media">매체</th>
+      <th class="col-date">발행</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center">1</td>
+      <td class="center"><span class="badge">자사</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/020/0003722635?sid=103" target="_blank">타타대우모빌리티 '하이쎈', 중형트럭 빈틈 공략</a>
+        <div class="summary">고하중·고출력 중심으로 재편된 중형트럭 시장의 빈틈을 자사 전략형 모델 '하이쎈'으로 공략. 도심 물류·작업형 특장 시장 겨냥. 전기·수소 친환경 전환 압박 속 단순 출력 경쟁이 아닌 <strong>운영 효율성과 유지비 경쟁력</strong>이 핵심이 될 것이라는 자사 메시지. 1년 차 김태성 사장의 '가격 경쟁력·틈새시장·단계적 전동화' 전략의 가시화.</div>
+      </td>
+      <td class="center">동아일보</td>
+      <td class="center">05-27 16:59</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td class="center"><span class="badge">경쟁사</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/031/0001031295?sid=101" target="_blank">노란봉투법 시행 두 달⋯현대차그룹 원·하청 교섭 갈등 본격화</a>
+        <div class="summary">노란봉투법 시행 두 달 만에 현대차 매장·공장 사내하청 4개 지회, 현대그린푸드 식당 3개 지회 등 교섭 요구 본격화. 특히 <strong>물류 자회사 현대글로비스의 광주·전주·울산 3개 지회 1,292명</strong>이 사측에 교섭 요구했으나 평행선. 경쟁사 임단협·생산 안정성 변수가 전주공장 가동 → 자사 시장 환경에 직접 연동.</div>
+      </td>
+      <td class="center">아이뉴스24</td>
+      <td class="center">05-27 18:16</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td class="center"><span class="badge">정책·인프라</span></td>
+      <td class="title-cell">
+        <a href="http://www.metroseoul.co.kr/article/20260527500390" target="_blank">수소산업 무게추 이동…생산·저장 인프라 구축 본격화</a>
+        <div class="summary">현대차그룹이 새만금에 태양광 발전설비와 <strong>200MW급 수전해 플랜트</strong>를 구축해 그린수소를 생산, 이를 전주공장에서 생산하는 수소버스·트럭 연료와 산업용 전력에 활용할 계획. 생산 인프라 + 자사 수요처 연계 구조로 수소상용차 사업 본격화. 자사 HX12 수소엔진·기쎈/하이쎈 친환경 라인업 정책 환경의 결정적 시그널.</div>
+      </td>
+      <td class="center">메트로서울</td>
+      <td class="center">05-27 16:06</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 국내 뉴스 -->
+<div class="section-header">국내 뉴스 (6건, cvinfo 2건 포함)</div>
+<table class="news">
+  <thead>
+    <tr>
+      <th class="col-no">No.</th>
+      <th class="col-cat">카테고리</th>
+      <th class="col-title">제목 · 요약</th>
+      <th class="col-media">매체</th>
+      <th class="col-date">발행</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="tier0">
+      <td class="center">1</td>
+      <td class="center"><span class="badge cvinfo">CVINFO</span></td>
+      <td class="title-cell">
+        <a href="https://www.cvinfo.com/news/articleView.html?idxno=31254" target="_blank">스카니아, MCS 기반 전기트럭 양방향 V2G 기술 구현</a>
+        <div class="summary">스카니아가 <strong>메가와트 충전 시스템(MCS)</strong>을 활용한 전기트럭-전력망 양방향 연계(V2G) 시연. 차고지 환경에서 태양광 등 재생에너지를 효율적으로 활용하고, 트럭이 피크 시간대 부하 분산·전력망 안정화·에너지 저장에 기여. 글로벌 OEM 전기 상용차 데포 충전 표준 동향 — 자사 친환경 라인업 인프라 전략 점검 시그널.</div>
+      </td>
+      <td class="center">상용차매거진</td>
+      <td class="center">05-27 14:47</td>
+    </tr>
+    <tr class="tier0">
+      <td class="center">2</td>
+      <td class="center"><span class="badge cvinfo">CVINFO</span></td>
+      <td class="title-cell">
+        <a href="https://www.cvinfo.com/news/articleView.html?idxno=31251" target="_blank">DAF, 카캐리어 전용 저상 라인업 출시…적재 효율 극대화</a>
+        <div class="summary">네덜란드 DAF가 XD·XF 트럭의 <strong>저상형(루프 18cm 다운, 캡 높이 2.7m)</strong> 버전 공개. 캡 위 적재 공간에 차량을 <strong>최대 11대</strong>까지 실을 수 있도록 적재 효율 극대화. PACCAR MX-11 10.8L 엔진(450마력·2,350Nm) 탑재. 글로벌 카캐리어 세그먼트 신차 시그널 — 룰북 §4 v1.4 의례성 재정의에 따라 메인 채택.</div>
+      </td>
+      <td class="center">상용차매거진</td>
+      <td class="center">05-27 12:18</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td class="center"><span class="badge">거시·운임</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/031/0001031320?sid=102" target="_blank">글로벌 물류 긴장감 고조…부산발 컨테이너 운임 'KCCI' 2400선 돌파</a>
+        <div class="summary">한국발 컨테이너 종합운임지수(KCCI)가 <strong>2400선 돌파</strong>. FAK(화물운임)·PSS(성수기할증료)·EFS(긴급연료할증료)가 실제 계약 운임에 반영되며 항로별 상승세 지속. 유럽·미주·남미 노선 급등 직후 이번 주에도 상승. <strong>자사 운송 고객(CJ대한통운·한진 등)의 수출입 화물 비용 직격</strong>.</div>
+      </td>
+      <td class="center">아이뉴스24</td>
+      <td class="center">05-27 19:25</td>
+    </tr>
+    <tr>
+      <td class="center">4</td>
+      <td class="center"><span class="badge">정책·지자체</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/016/0002648829?sid=102" target="_blank">광주시, 전기차 보조금 지원 450대 추가 (전기화물차 100대 포함)</a>
+        <div class="summary">광주시가 전기승용차 350대 + <strong>전기화물차 100대</strong> 등 총 450대를 추가 보급. 5/28부터 2차 접수. "중동전쟁에 따른 고유가 여파와 친환경차 선호 확산으로 수요 급증"이 사유. 같은 날 울산시도 4월까지 연간 사업비 54% 집행으로 추가 보급 검토 시사. <strong>지자체 보조금 잔여물량 확대</strong>는 자사 기쎈·하이쎈 영업 기회.</div>
+      </td>
+      <td class="center">헤럴드경제</td>
+      <td class="center">05-27 15:24</td>
+    </tr>
+    <tr class="safety">
+      <td class="center">5</td>
+      <td class="center"><span class="badge">안전</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/003/0013970780?sid=102" target="_blank">광주·전남 고속도로, 교통사고 사망 주요 원인 '졸음·주시 태만'</a>
+        <div class="summary">광주·전남 고속도로 사망사고 <strong>5건 중 4건이 졸음·주시 태만</strong>. 차종별 화물차 3건 / 승용 2건. 도로공사는 졸음쉼터 추가 설치 공사 진행, 화물차 운전자 캠페인·단속 강화. 경찰청도 5/26~7/25 화물차 불법행위 특별 집중단속 병행. <strong>자사 차량 평판·ADAS 강화 시사점</strong>.</div>
+      </td>
+      <td class="center">뉴시스</td>
+      <td class="center">05-27 15:47</td>
+    </tr>
+    <tr>
+      <td class="center">6</td>
+      <td class="center"><span class="badge">거시·지정학</span></td>
+      <td class="title-cell">
+        <a href="https://n.news.naver.com/mnews/article/016/0002649002?sid=104" target="_blank">[속보] 호르무즈 인근 이란 남부 항구도시 반다르아바스 연쇄 폭발음</a>
+        <div class="summary">이란 매체 5/28 새벽(KST 07시경) 반다르아바스에서 연쇄 폭발음 보고, 방공망 수분간 가동. 호르무즈 해협 인근 최대 항구로 <strong>유가·해상운임·EFS 변동 직격</strong>. 동일 시간대 트럼프 행정부 '합의 타결' 발표 가능성 보도와 동시 발생 — 사실관계 후속 확인 필요. 자사 운송 고객 운영비 변동성 정점.</div>
+      </td>
+      <td class="center">헤럴드경제</td>
+      <td class="center">05-28 08:13</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 해외 뉴스 -->
+<div class="section-header">해외 뉴스 (3건)</div>
+<table class="news">
+  <thead>
+    <tr>
+      <th class="col-no">No.</th>
+      <th class="col-cat">카테고리</th>
+      <th class="col-title">제목 · 요약</th>
+      <th class="col-media">매체</th>
+      <th class="col-date">발행</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center">1</td>
+      <td class="center"><span class="badge">신엔진</span></td>
+      <td class="title-cell">
+        <a href="https://www.volvotrucks.com/en-en/news-stories/press-releases/2026/may/volvo-trucks-announces-global-product-launch---a-range-of-new-po.html" target="_blank">Volvo Trucks announces global product launch — 신엔진 플랫폼 + 전기 드라이브라인 (700km)</a>
+        <div class="summary">볼보트럭이 <strong>수십억 SEK 투자</strong>로 신형 13L 디젤·가스 연소엔진 플랫폼과 주행거리 최대 700km 전기 드라이브라인을 동시 공개. 신엔진은 스웨덴 셰브데(Skövde) 공장 생산, <strong>3Q26 판매 개시</strong>. 바이오디젤·바이오가스·수소 호환 설계 — 2040 넷제로 로드맵 가속. 룰북 §해외 필터 '신엔진' 정확히 일치.</div>
+      </td>
+      <td class="center">Volvo Trucks</td>
+      <td class="center">05-27</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td class="center"><span class="badge">양산</span></td>
+      <td class="title-cell">
+        <a href="https://electrek.co/2026/05/05/tesla-semi-60-truck-order-forum-mobility-port-drayage/" target="_blank">Tesla Semi 본격 양산 + Forum Mobility 60대·WattEV 370대 수주</a>
+        <div class="summary">테슬라 세미가 Reno 공장에서 <strong>4/29 고볼륨 양산 개시</strong>, 2026년 내 '수천 대' 생산 목표(연 5만대 ramp-up). 캘리포니아 항만 드레이지 사업자 2곳이 Forum Mobility 통해 <strong>60대 합동 발주</strong>(자사 fleet 발주 사상 최대), WattEV는 별도 370대 수주. 글로벌 전기 클래스 8 양산 가속 — 자사 전기상용차 사업 환경 시그널.</div>
+      </td>
+      <td class="center">Electrek</td>
+      <td class="center">05-27</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td class="center"><span class="badge">C레벨 인사</span></td>
+      <td class="title-cell">
+        <a href="https://www.ttnews.com/articles/daimler-truck-earnings-q1-2026" target="_blank">Daimler Truck, Mercedes-Benz Trucks 엔지니어링 수장 교체 — Marcus Ekman 10/1 취임</a>
+        <div class="summary">메르세데스-벤츠 트럭 엔지니어링 총괄(Head of Engineering)에 <strong>Marcus Ekman 10/1부 취임</strong>, 전임 Rainer Müller-Finkeldei는 7월말 퇴임. 한편 DTNA(다임러트럭 북미법인)는 Q2 판매가 Q1(29,432대, -24.5%) 대비 <strong>50% 앞서</strong>는 페이스. 룰북 §해외 필터 'C레벨 교체' 정확히 일치 — 글로벌 OEM 제품·기술 결정권자 변경.</div>
+      </td>
+      <td class="center">Transport Topics</td>
+      <td class="center">05-27</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 푸터 -->
+<div class="footer-box">
+  <span class="label">[전문지 참고] cvinfo (상용차매거진) — 의례성·범위 밖 기사</span>
+  <ul style="margin:4px 0 4px 18px; padding:0;">
+    <li>cvinfo 5/27 신착 중 본문 채택 2건(스카니아 V2G, DAF 저상). 의례성·범위 밖 미채택:
+      <a href="https://www.klnews.co.kr/news/articleView.html?idxno=321250" target="_blank">[KLNews 5/27] 타타대우, 딜러·협력사와 미래 성장 기반 다져</a>
+      (5/21·5/18 행사 재보도 — 의례성, 푸터 처리)</li>
+    <li>범위 직전 발행분(5/27 오전):
+      <a href="https://www.cvinfo.com/news/articleView.html?idxno=31152" target="_blank">[cvinfo 5/27 10:19] 1분기 트럭시장 20%↓…15톤 덤프만 '나홀로 선방'</a>,
+      <a href="https://www.cvinfo.com/news/articleView.html?idxno=31157" target="_blank">[cvinfo 5/27 10:19] 이스즈 5톤 포워드, 압축진개차로 도심 특장 시장 공략</a>
+      — 전일자 클리핑(5/27자)에 미채택이라면 별도 보강 권장.</li>
+  </ul>
+  <div class="review-note">
+    <strong>검수 권장 포인트.</strong>
+    ① <strong>호르무즈 폭발 속보(헤럴드 5/28 08:13)</strong>는 발행 시점 90분 내 1차 보도로, 사실관계 후속 변동 가능 — 오전 시황 보강 필요. ② cvinfo 신착이 수집 범위(5/27 12:00~) 한정으로 2건 채택. <strong>5/27 오전 발행된 1분기 트럭시장 통계·만트럭 TGX 리콜(5/26)</strong>은 전일자 클리핑 포함으로 가정하나 미채택이라면 별도 보고. ③ 자사 KLNews '딜러·협력사 컨퍼런스' 5/27 재보도는 5/21·5/18 행사 의례성 보도로 푸터 처리.
+  </div>
+</div>
+
+<div class="legend">
+  <span class="swatch" style="background:#fef3c7;"></span> Tier 0 (cvinfo, 상용차 전문지) &nbsp;|&nbsp;
+  <span class="swatch" style="background:#dbeafe;"></span> 산업·안전 이슈 &nbsp;|&nbsp;
+  선별 필터: ① 자사·경쟁사 직접 영향 · ② 화물운송·운임 거시 · ③ 정책·규제 · ④ 산업 안전·사고<br>
+  매체 우선순위: Tier 0 (cvinfo) → Tier 1 (종합·경제·통신사) → Tier 2 (선택적) · Rulebook v1.4
+</div>
+
+</body>
+</html>

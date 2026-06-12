@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>타타대우모빌리티 데일리 뉴스 클리핑</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif; color:#111827; background:#fff; }
+  #topbar { position:sticky; top:0; z-index:100; display:flex; justify-content:space-between; align-items:center;
+            background:#fff; border-bottom:1px solid #e5e7eb; padding:8px 16px; height:48px; }
+  #brand { font-weight:800; font-size:13px; color:#1e3a8a; letter-spacing:0.3px; }
+  #brand span { color:#60a5fa; }
+  #dateBtn { display:flex; align-items:center; gap:8px; border:1px solid #e5e7eb; background:#fff; border-radius:6px;
+             padding:6px 12px; font-size:13px; font-weight:700; color:#111827; cursor:pointer; font-family:inherit; }
+  #dateBtn:hover { background:#f9fafb; }
+  #dateBtn .chev { color:#6b7280; font-size:11px; }
+  #calPop { display:none; position:absolute; top:46px; right:12px; width:308px; background:#fff;
+            border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 8px 24px rgba(17,24,39,0.12); padding:12px 14px; }
+  #calPop.open { display:block; }
+  #calHead { display:flex; justify-content:space-between; align-items:center; margin:2px 2px 8px 2px; }
+  #calTitle { font-weight:800; font-size:13.5px; color:#111827; }
+  .navBtn { border:none; background:none; cursor:pointer; color:#4b5563; font-size:12px; padding:4px 8px; border-radius:4px; }
+  .navBtn:hover { background:#f3f4f6; }
+  .navBtn:disabled { color:#d1d5db; cursor:default; background:none; }
+  #calGrid { display:grid; grid-template-columns:repeat(7,1fr); row-gap:2px; text-align:center; }
+  .dow { font-size:11.5px; color:#6b7280; font-weight:700; padding:4px 0 6px 0; }
+  .day { height:36px; display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .day b { width:32px; height:32px; line-height:32px; border-radius:50%; font-weight:400; }
+  .day.off b { color:#d1d5db; }
+  .day.no b  { color:#9ca3af; }
+  .day.has b { color:#1d4ed8; font-weight:700; cursor:pointer; }
+  .day.has b:hover { background:#eff6ff; }
+  .day.sel b { background:#1e3a8a; color:#fff; font-weight:700; cursor:pointer; }
+  #frame { width:100%; height:calc(100vh - 48px); border:none; display:block; }
+</style>
+</head>
+<body>
+<div id="topbar">
+  <div id="brand">TATA DAEWOO <span>MOBILITY</span> &middot; DAILY NEWS CLIPPING</div>
+  <button id="dateBtn" type="button"><span id="dateLabel"></span><span class="chev">&#9662;</span></button>
+  <div id="calPop">
+    <div id="calHead">
+      <div id="calTitle"></div>
+      <div>
+        <button class="navBtn" id="prevM" type="button">&#9650;</button>
+        <button class="navBtn" id="nextM" type="button">&#9660;</button>
+      </div>
+    </div>
+    <div id="calGrid"></div>
+  </div>
+</div>
+<iframe id="frame" title="clipping"></iframe>
+<script>
+(function(){
+  var DATES = ["20260612", "20260611", "20260610", "20260609", "20260605", "20260604", "20260602", "20260601", "20260529", "20260528", "20260527", "20260526", "20260522", "20260519"];
+  var AVAIL = {}; DATES.forEach(function(d){ AVAIL[d] = true; });
+  var WD = ['일','월','화','수','목','금','토'];
+  var minD = DATES[DATES.length-1], maxD = DATES[0];
+  var cur = (location.hash||'').replace('#','');
+  if (!AVAIL[cur]) cur = DATES[0];
+  var viewY, viewM;
+
+  function $(id){ return document.getElementById(id); }
+  function p(d){ return { y:+d.slice(0,4), m:+d.slice(4,6), day:+d.slice(6,8) }; }
+  function pad(n){ return (n<10?'0':'')+n; }
+  function key(y,m,day){ return ''+y+pad(m)+pad(day); }
+
+  function show(d){
+    cur = d;
+    $('frame').src = 'archive/Daily_News_Monitoring_' + d + '.html';
+    var o = p(d), dt = new Date(o.y, o.m-1, o.day);
+    $('dateLabel').textContent = o.m + '월 ' + o.day + '일 ' + WD[dt.getDay()] + '요일';
+    if (history.replaceState) history.replaceState(null,'','#'+d);
+    renderCal();
+  }
+
+  function renderCal(){
+    if (!viewY) { var o = p(cur); viewY = o.y; viewM = o.m; }
+    $('calTitle').textContent = viewY + '년 ' + viewM + '월';
+    var minYM = +minD.slice(0,6), maxYM = +maxD.slice(0,6), ym = viewY*100+viewM;
+    $('prevM').disabled = ym <= minYM;
+    $('nextM').disabled = ym >= maxYM;
+    var g = $('calGrid'); g.innerHTML = '';
+    for (var w=0; w<7; w++){ var e=document.createElement('div'); e.className='dow'; e.textContent=WD[w]; g.appendChild(e); }
+    var first = new Date(viewY, viewM-1, 1);
+    var start = new Date(viewY, viewM-1, 1 - first.getDay());
+    for (var i=0;i<42;i++){
+      var dt = new Date(start.getFullYear(), start.getMonth(), start.getDate()+i);
+      var k = key(dt.getFullYear(), dt.getMonth()+1, dt.getDate());
+      var cell = document.createElement('div'), inner = document.createElement('b');
+      inner.textContent = dt.getDate();
+      var inMonth = (dt.getMonth()+1) === viewM && dt.getFullYear() === viewY;
+      if (!inMonth) cell.className = 'day off';
+      else if (k === cur) cell.className = 'day sel';
+      else if (AVAIL[k]) cell.className = 'day has';
+      else cell.className = 'day no';
+      if (AVAIL[k]) (function(kk){
+        inner.onclick = function(){ show(kk); $('calPop').classList.remove('open'); };
+      })(k);
+      cell.appendChild(inner); g.appendChild(cell);
+    }
+  }
+
+  $('dateBtn').onclick = function(e){
+    e.stopPropagation();
+    var pop = $('calPop');
+    if (!pop.classList.contains('open')) { var o = p(cur); viewY = o.y; viewM = o.m; renderCal(); }
+    pop.classList.toggle('open');
+  };
+  $('calPop').onclick = function(e){ e.stopPropagation(); };
+  document.addEventListener('click', function(){ $('calPop').classList.remove('open'); });
+  $('prevM').onclick = function(){ if(--viewM < 1){ viewM=12; viewY--; } renderCal(); };
+  $('nextM').onclick = function(){ if(++viewM > 12){ viewM=1; viewY++; } renderCal(); };
+  window.addEventListener('hashchange', function(){
+    var h = (location.hash||'').replace('#','');
+    if (AVAIL[h] && h !== cur) show(h);
+  });
+
+  show(cur);
+})();
+</script>
+</body>
+</html>
