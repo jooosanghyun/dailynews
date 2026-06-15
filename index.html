@@ -15,6 +15,11 @@
   #dateBtn { display:flex; align-items:center; gap:10px; border:none; background:#1e3a8a; border-radius:8px;
              padding:10px 18px; font-size:15px; font-weight:700; color:#fff; cursor:pointer; font-family:inherit; }
   #dateBtn:hover { background:#1d4ed8; }
+  #rightctrls { display:flex; align-items:center; gap:10px; }
+  #todayBtn { border:1px solid #1e3a8a; background:#fff; border-radius:8px; padding:9px 14px; font-size:13px;
+              font-weight:700; color:#1e3a8a; cursor:pointer; font-family:inherit; letter-spacing:0.5px; }
+  #todayBtn:hover { background:#eff6ff; }
+  #todayBtn:disabled { border-color:#d1d5db; color:#d1d5db; cursor:default; background:#fff; }
   #dateBtn .chev { color:#bfdbfe; font-size:12px; }
   #calPop { display:none; position:absolute; top:54px; right:12px; width:308px; background:#fff;
             border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 8px 24px rgba(17,24,39,0.12); padding:12px 14px; }
@@ -39,7 +44,10 @@
 <body>
 <div id="topbar">
   <div id="brand">TATA DAEWOO <span>MOBILITY</span> &middot; DAILY NEWS CLIPPING</div>
-  <button id="dateBtn" type="button"><span id="dateLabel"></span><span class="chev">&#9662;</span></button>
+  <div id="rightctrls">
+    <button id="todayBtn" type="button">TODAY</button>
+    <button id="dateBtn" type="button"><span id="dateLabel"></span><span class="chev">&#9662;</span></button>
+  </div>
   <div id="calPop">
     <div id="calHead">
       <div id="calTitle"></div>
@@ -74,6 +82,7 @@
     $('dateLabel').textContent = o.m + '월 ' + o.day + '일 ' + WD[dt.getDay()] + '요일';
     if (history.replaceState) history.replaceState(null,'','#'+d);
     renderCal();
+    updateTodayBtn();
   }
 
   function renderCal(){
@@ -117,6 +126,17 @@
     var h = (location.hash||'').replace('#','');
     if (AVAIL[h] && h !== cur) show(h);
   });
+
+  function todayKey(){ var n=new Date(); return key(n.getFullYear(), n.getMonth()+1, n.getDate()); }
+  function todayTarget(){ var t=todayKey(); return AVAIL[t] ? t : DATES[0]; }
+  function updateTodayBtn(){ $('todayBtn').disabled = (cur === todayTarget()); }
+  $('todayBtn').onclick = function(e){
+    e.stopPropagation();
+    var tgt = todayTarget();
+    viewY = +tgt.slice(0,4); viewM = +tgt.slice(4,6);
+    show(tgt);
+    $('calPop').classList.remove('open');
+  };
 
   show(cur);
 })();
