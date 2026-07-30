@@ -20,6 +20,11 @@
               font-weight:700; color:#1e3a8a; cursor:pointer; font-family:inherit; letter-spacing:0.5px; }
   #todayBtn:hover { background:#eff6ff; }
   #todayBtn:disabled { border-color:#d1d5db; color:#d1d5db; cursor:default; background:#fff; }
+  #edSwitch { display:flex; border:1px solid #1e3a8a; border-radius:8px; overflow:hidden; }
+  #edSwitch button { border:none; background:#fff; color:#1e3a8a; font-family:inherit; font-size:12.5px;
+                     font-weight:700; padding:9px 12px; cursor:pointer; white-space:nowrap; }
+  #edSwitch button.on { background:#1e3a8a; color:#fff; }
+  #edSwitch button:disabled { color:#d1d5db; cursor:default; background:#f9fafb; }
   #dateBtn .chev { color:#bfdbfe; font-size:12px; }
   #calPop { display:none; position:absolute; top:54px; right:12px; width:308px; background:#fff;
             border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 8px 24px rgba(17,24,39,0.12); padding:12px 14px; }
@@ -45,6 +50,10 @@
 <div id="topbar">
   <div id="brand">TATA DAEWOO <span>MOBILITY</span> &middot; DAILY NEWS CLIPPING &middot; <span id="latestTag">최신 2026-07-30</span></div>
   <div id="rightctrls">
+    <div id="edSwitch">
+      <button id="edExec" type="button">임원 발송판</button>
+      <button id="edSelf" type="button">자체 수집판</button>
+    </div>
     <button id="todayBtn" type="button">TODAY</button>
     <button id="dateBtn" type="button"><span id="dateLabel"></span><span class="chev">&#9662;</span></button>
   </div>
@@ -62,13 +71,40 @@
 <iframe id="frame" title="clipping"></iframe>
 <script>
 (function(){
-  var DATES = ["20260730", "20260729", "20260728", "20260727", "20260724", "20260723", "20260722", "20260721", "20260720", "20260716", "20260715", "20260714", "20260713", "20260710", "20260709", "20260708", "20260707", "20260706", "20260703", "20260702", "20260701", "20260630", "20260629", "20260626", "20260625", "20260619", "20260618", "20260617", "20260616", "20260615", "20260612", "20260611", "20260610", "20260609", "20260605", "20260604", "20260602", "20260601", "20260529", "20260528", "20260527", "20260526", "20260522", "20260519"];
+  var SELF_DATES = ["20260730", "20260729", "20260728", "20260727", "20260724", "20260723", "20260722", "20260721", "20260720", "20260716", "20260715", "20260714", "20260713", "20260710", "20260709", "20260708", "20260707", "20260706", "20260703", "20260702", "20260701", "20260630", "20260629", "20260626", "20260625", "20260619", "20260618", "20260617", "20260616", "20260615", "20260612", "20260611", "20260610", "20260609", "20260605", "20260604", "20260602", "20260601", "20260529", "20260528", "20260527", "20260526", "20260522", "20260519"];
+  var EXEC_DATES = ["20260730"];
+  var HAS_SELF = {}; SELF_DATES.forEach(function(d){ HAS_SELF[d] = true; });
+  var HAS_EXEC = {}; EXEC_DATES.forEach(function(d){ HAS_EXEC[d] = true; });
+  // 달력에는 두 판본 중 하나라도 있는 날짜를 노출
+  var DATES = SELF_DATES.concat(EXEC_DATES).filter(function(d,i,a){ return a.indexOf(d)===i; })
+                        .sort().reverse();
   var AVAIL = {}; DATES.forEach(function(d){ AVAIL[d] = true; });
   var WD = ['일','월','화','수','목','금','토'];
   var minD = DATES[DATES.length-1], maxD = DATES[0];
-  var cur = (location.hash||'').replace('#','');
+  var hash = (location.hash||'').replace('#','').split('/');
+  var cur = hash[0];
   if (!AVAIL[cur]) cur = DATES[0];
+  // 기본 판본: 임원 발송판이 있으면 그것, 없으면 자체 수집판
+  var ed = (hash[1] === 'self' || hash[1] === 'exec') ? hash[1]
+           : (HAS_EXEC[cur] ? 'exec' : 'self');
   var viewY, viewM;
+
+  function fileFor(d, e){
+    return 'archive/' + (e === 'exec' ? 'Exec' : 'Daily') + '_News_Monitoring_' + d + '.html';
+  }
+  function hasEd(d, e){ return e === 'exec' ? !!HAS_EXEC[d] : !!HAS_SELF[d]; }
+
+  function renderEdSwitch(){
+    $('edExec').disabled = !HAS_EXEC[cur];
+    $('edSelf').disabled = !HAS_SELF[cur];
+    $('edExec').className = (ed === 'exec') ? 'on' : '';
+    $('edSelf').className = (ed === 'self') ? 'on' : '';
+  }
+  function setEd(e){
+    if (!hasEd(cur, e)) return;
+    ed = e;
+    show(cur);
+  }
 
   function $(id){ return document.getElementById(id); }
   function p(d){ return { y:+d.slice(0,4), m:+d.slice(4,6), day:+d.slice(6,8) }; }
@@ -77,12 +113,15 @@
 
   function show(d){
     cur = d;
-    $('frame').src = 'archive/Daily_News_Monitoring_' + d + '.html';
+    // 선택한 날짜에 현재 판본이 없으면 있는 쪽으로 자동 전환
+    if (!hasEd(cur, ed)) ed = (ed === 'exec') ? 'self' : 'exec';
+    $('frame').src = fileFor(cur, ed);
     var o = p(d), dt = new Date(o.y, o.m-1, o.day);
     $('dateLabel').textContent = o.m + '월 ' + o.day + '일 ' + WD[dt.getDay()] + '요일';
-    if (history.replaceState) history.replaceState(null,'','#'+d);
+    if (history.replaceState) history.replaceState(null,'','#'+d+'/'+ed);
     renderCal();
     updateTodayBtn();
+    renderEdSwitch();
   }
 
   function renderCal(){
@@ -123,9 +162,13 @@
   $('prevM').onclick = function(){ if(--viewM < 1){ viewM=12; viewY--; } renderCal(); };
   $('nextM').onclick = function(){ if(++viewM > 12){ viewM=1; viewY++; } renderCal(); };
   window.addEventListener('hashchange', function(){
-    var h = (location.hash||'').replace('#','');
-    if (AVAIL[h] && h !== cur) show(h);
+    var h = (location.hash||'').replace('#','').split('/');
+    if (h[1] === 'self' || h[1] === 'exec') ed = h[1];
+    if (AVAIL[h[0]]) show(h[0]);
   });
+
+  $('edExec').onclick = function(e){ e.stopPropagation(); setEd('exec'); };
+  $('edSelf').onclick = function(e){ e.stopPropagation(); setEd('self'); };
 
   function todayKey(){ var n=new Date(); return key(n.getFullYear(), n.getMonth()+1, n.getDate()); }
   function todayTarget(){ var t=todayKey(); return AVAIL[t] ? t : DATES[0]; }
