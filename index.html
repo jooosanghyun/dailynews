@@ -37,13 +37,17 @@
   .navBtn:disabled { color:#d1d5db; cursor:default; background:none; }
   #calGrid { display:grid; grid-template-columns:repeat(7,1fr); row-gap:2px; text-align:center; }
   .dow { font-size:11.5px; color:#6b7280; font-weight:700; padding:4px 0 6px 0; }
-  .day { height:36px; display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .day { position:relative; height:40px; display:flex; align-items:center; justify-content:center; font-size:13px; }
   .day b { width:32px; height:32px; line-height:32px; border-radius:50%; font-weight:400; }
   .day.off b { color:#d1d5db; }
   .day.no b  { color:#9ca3af; }
   .day.has b { color:#1d4ed8; font-weight:700; cursor:pointer; }
   .day.has b:hover { background:#eff6ff; }
   .day.sel b { background:#1e3a8a; color:#fff; font-weight:700; cursor:pointer; }
+  /* 자사(타타대우) 관련 뉴스가 실린 날 — 숫자 아래 점 마커 */
+  .day .dot { position:absolute; left:50%; bottom:2px; transform:translateX(-50%);
+              width:4px; height:4px; border-radius:50%; background:#2563eb; pointer-events:none; }
+  .day.sel .dot { background:#1e3a8a; }
   #frame { width:100%; height:calc(100vh - 56px); border:none; display:block; }
 </style>
 </head>
@@ -69,6 +73,7 @@
 <script>
 (function(){
   var DATES = ["20260731", "20260730", "20260729", "20260728", "20260727", "20260724", "20260723", "20260722", "20260721", "20260720", "20260716", "20260715", "20260714", "20260713", "20260710", "20260709", "20260708", "20260707", "20260706", "20260703", "20260702", "20260701", "20260630", "20260629", "20260626", "20260625", "20260619", "20260618", "20260617", "20260616", "20260615", "20260612", "20260611", "20260610", "20260609", "20260605", "20260604", "20260602", "20260601", "20260529", "20260528", "20260527", "20260526", "20260522", "20260519"];
+  var TATA = {"20260522": 4, "20260526": 16, "20260528": 2, "20260601": 1, "20260602": 2, "20260605": 2, "20260609": 1, "20260619": 2, "20260625": 1, "20260626": 1, "20260629": 1, "20260630": 1, "20260703": 1, "20260708": 1, "20260710": 1, "20260713": 1, "20260716": 1, "20260721": 1, "20260722": 1, "20260723": 2, "20260730": 1};              // { 'YYYYMMDD': 자사 기사 수 } — 캘린더 점 마커
   var AVAIL = {}; DATES.forEach(function(d){ AVAIL[d] = true; });
   var WD = ['일','월','화','수','목','금','토'];
   var minD = DATES[DATES.length-1], maxD = DATES[0];
@@ -114,7 +119,14 @@
       if (AVAIL[k]) (function(kk){
         inner.onclick = function(){ show(kk); $('calPop').classList.remove('open'); };
       })(k);
-      cell.appendChild(inner); g.appendChild(cell);
+      cell.appendChild(inner);
+      if (inMonth && TATA[k]) {
+        var dot = document.createElement('span');
+        dot.className = 'dot';
+        cell.title = '자사 관련 뉴스 ' + TATA[k] + '건';
+        cell.appendChild(dot);
+      }
+      g.appendChild(cell);
     }
   }
 
